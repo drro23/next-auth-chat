@@ -1,0 +1,55 @@
+module.exports = {
+  future: {
+    // removeDeprecatedGapUtilities: true,
+    // purgeLayersByDefault: true,
+  },
+  purge: [],
+  theme: {
+    extend: {
+      colors: {
+        indigo: "#5c6ac4",
+        darkBlack: "#333333",
+      },
+    },
+  },
+  variants: {
+    backgroundColor: [
+      "responsive",
+      "hover",
+      "focus",
+      "group-focus",
+      "dark",
+      "dark-hover",
+      "dark-group-hover",
+      "dark-even",
+      "dark-odd",
+    ],
+    borderColor: [
+      "responsive",
+      "hover",
+      "focus",
+      "group-focus",
+      "focus-within",
+      "dark",
+      "dark-disabled",
+      "dark-focus",
+      "dark-hover",
+      "dark-group-hover",
+      "dark-focus-within",
+    ],
+    textColor: [
+      "responsive",
+      "hover",
+      "focus",
+      "focus-within",
+      "group-hover",
+      "group-focus",
+      "dark",
+      "dark-hover",
+      "dark-active",
+      "dark-group-hover",
+      "dark-placeholder",
+    ],
+  },
+  plugins: [require("tailwindcss-dark-mode")()],
+};

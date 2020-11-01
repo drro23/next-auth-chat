@@ -1,0 +1,13 @@
+@layer components {
+    .rounded-border {
+        @apply flex items-center justify-center border h-10 w-10 rounded-full;
+    }
+
+    // .rounded-border:hover {
+    //     @apply border-gray-800;
+    // }
+
+    .rounded-border:not(:first-child) {
+        @apply ml-3;
+    }
+}
