@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { Icon } from "@material-ui/core";
-import { toggleTheme } from '../../slices/darkSlice';
+import { toggleTheme } from "../../slices/darkSlice";
 
 const mapState = (state) => {
   return { counter: state.counter, isDark: state.isDark };
@@ -29,18 +29,16 @@ function SwitchTheme(props) {
   }, [isDark]);
 
   return (
-    <div className="flex justify-end mb-2">
-      <button
-        className="focus:outline-none"
-        onClick={() => dispatch(toggleTheme())}
-      >
-        <Icon
-          className={`${
-            !isDark ? "far fa-sun" : "fas fa-moon"
-          } fill-current text-black dark:text-white`}
-        />
-      </button>
-    </div>
+    <button
+      className="focus:outline-none"
+      onClick={() => dispatch(toggleTheme())}
+    >
+      <Icon
+        className={`${
+          !isDark ? "far fa-sun" : "fas fa-moon"
+        } fill-current text-black dark:text-white`}
+      />
+    </button>
   );
 }
 

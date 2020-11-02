@@ -8,7 +8,9 @@ import SwitchTheme from "../components/SwitchTheme";
 function Login() {
   return (
     <div className="bg-white dark:bg-darkBlack w-5/6 md:w-2/5 lg:w-1/3 border-solid border border-gray-300 mx-auto mt-6 rounded-xl p-8">
-      <SwitchTheme />
+      <div className="flex justify-end mb-2">
+        <SwitchTheme />
+      </div>
       <p className="text-xl mb-4 text-center">
         <DrroLogo className="inline fill-current text-black dark:text-white" />
       </p>
