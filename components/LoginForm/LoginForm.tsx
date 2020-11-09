@@ -3,7 +3,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Mail, Lock } from "@material-ui/icons";
 import { useRouter } from 'next/router';
-import { auth } from '../../config/firebase';
+import AuthService from "../../util/userAuth";
+import { toast } from 'react-toastify';
 
 interface IFormInput {
   email: string;
@@ -20,19 +21,14 @@ export default function LoginForm() {
     resolver: yupResolver(schema),
   });
   const router = useRouter();
-
-  async function login(data) {
-    try {
-      let res = await  auth.signInWithEmailAndPassword(data.email, data.password);
-      console.log(res);
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  const authService = new AuthService();
 
   // router.push('/profile')
   
-  const onSubmit = (data: IFormInput) => login(data);
+  const onSubmit = (data: IFormInput) => {
+    // let res = authService.login(data);
+    toast.info(data.email);
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">

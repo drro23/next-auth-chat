@@ -5,7 +5,7 @@ import Document, {
   NextScript,
   DocumentContext,
 } from "next/document";
-
+import { ToastContainer, Zoom } from "react-toastify";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -19,6 +19,7 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head />
         <body className="dark:bg-darkBlack bg-gray-100 font-sans">
+          <ToastContainer transition={Zoom}/>
           <Main />
           <NextScript />
         </body>

@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Mail, Lock } from "@material-ui/icons";
-import { auth } from '../../config/firebase';
 
 interface IFormInput {
   email: string;
@@ -18,9 +17,10 @@ export default function SignUpForm() {
   const { register, errors, handleSubmit } = useForm<IFormInput>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data: IFormInput) => auth.createUserWithEmailAndPassword(data.email, data.password).then(userCredentials => {
-    console.log(userCredentials)
-  }).catch(e => console.log(e));
+
+  const onSubmit = (data: IFormInput) => {
+    console.log("submit")
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">

@@ -4,6 +4,7 @@ import { Icon } from "@material-ui/core";
 import DrroLogo from "../components/icons/DrroLogo";
 import LoginForm from "../components/LoginForm";
 import SwitchTheme from "../components/SwitchTheme";
+import { toast } from 'react-toastify';
 
 function Login() {
   return (
