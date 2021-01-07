@@ -2,10 +2,11 @@ import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { Icon } from "@material-ui/core";
-import { toggleTheme } from "../../slices/darkSlice";
+import { toggleTheme } from "../../slices/appSlice";
+import changeTheme from "../../util/changeTheme";
 
-const mapState = (state) => {
-  return { counter: state.counter, isDark: state.isDark };
+const mapState = ({ counter, app}) => {
+  return { counter: counter, isDark: app.isDark };
 };
 
 const actionCreators = {
@@ -17,15 +18,7 @@ function SwitchTheme(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const htmlEl = document.getElementsByTagName("html");
-    const darkTheme = localStorage.getItem("isDark");
-
-    if (
-      !isDark &&
-      darkTheme === "true" &&
-      !htmlEl[0].classList.contains("mode-dark")
-    )
-      dispatch(toggleTheme());
+    changeTheme(isDark);
   }, [isDark]);
 
   return (

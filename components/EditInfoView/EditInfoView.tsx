@@ -1,14 +1,19 @@
 import { ArrowBackIos } from '@material-ui/icons';
 import ChangeInfoForm from '../ChangeInfoForm';
+import { motion } from 'framer-motion';
 
 interface IEditInfoViewProps {
   toggleEditMode(): void;
 }
 
 export default function EditInfoView(props: IEditInfoViewProps) {
+  const variants = {
+    visible: { opacity: 1},
+    hidden: { opacity: 0}
+  }
   return (
-    <div className="p-4">
-      <div className="w-full md:w-3/5 mx-auto">
+    <motion.div animate="visible" initial="hidden" variants={variants} className="p-4">
+      <div className="w-full md:w-1/2 mx-auto">
         <div>
           <button
             className="text-blue-500 hover:text-blue-300 focus:outline-none flex items-center"
@@ -27,6 +32,6 @@ export default function EditInfoView(props: IEditInfoViewProps) {
           <ChangeInfoForm />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

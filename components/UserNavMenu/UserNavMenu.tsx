@@ -2,7 +2,11 @@ import { ArrowDropDown, ArrowDropUp } from "@material-ui/icons";
 import DropDownProfile from "../DropDownProfile";
 import { useState } from "react";
 
-export default function UserNavMenu() {
+interface IProps {
+  userName: string;
+}
+
+export default function UserNavMenu(props: IProps) {
   let [isMenuOpen, setMenuOpen] = useState<boolean>(false);
 
   let openDropDownMenu = () => {
@@ -22,7 +26,7 @@ export default function UserNavMenu() {
           width="40"
           height="35"
         />
-        <p className="text-black dark:text-white ml-4">Xavier Neal</p>
+        <p className="text-black dark:text-white ml-4">{props.userName}</p>
         <ArrowDropDown
           className={`transform ${
             isMenuOpen ? "rotate-180" : "rotate-0"

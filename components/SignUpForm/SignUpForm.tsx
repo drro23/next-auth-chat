@@ -2,8 +2,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Mail, Lock } from "@material-ui/icons";
+import AuthService from "../../services/userAuth";
+import { useRouter } from "next/router";
 
-interface IFormInput {
+export interface ISignUpFormInput {
   email: string;
   password: string;
 }
@@ -14,12 +16,15 @@ const schema = yup.object().shape({
 });
 
 export default function SignUpForm() {
-  const { register, errors, handleSubmit } = useForm<IFormInput>({
+  const router = useRouter();
+  const authService = new AuthService();
+  const { register, errors, handleSubmit } = useForm<ISignUpFormInput>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: IFormInput) => {
-    console.log("submit")
+  const onSubmit = (data: ISignUpFormInput) => {
+    authService.signUp(data);
+    router.push('/');
   }
 
   return (
@@ -46,7 +51,7 @@ export default function SignUpForm() {
         />
       </div>
       <p className="mb-2 pl-2 text-sm text-red-600">{errors.password?.message}</p>
-      <input className="rounded bg-blue-400 hover:bg-blue-600 cursor-pointer focus:outline-none text-white py-2" type="submit" value="Sign Up"/>
+      <input className="rounded bg-blue-600 hover:bg-blue-500 cursor-pointer focus:outline-none text-white py-2" type="submit" value="Sign Up"/>
     </form>
   );
 }

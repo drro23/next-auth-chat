@@ -1,18 +1,11 @@
-export default function changeTheme() {
-    const elHtml = document.getElementsByTagName('html')
-    const darkTheme = localStorage.getItem('isDark')
-    let isDark = false;
+export default function changeTheme(isDark) {
+  const html = document.querySelector('html');
 
-    if (elHtml[0].classList.contains('mode-dark') && darkTheme)
-    {
-        elHtml[0].classList.remove('mode-dark')
-        isDark = false;
-    }
-    else
-    {
-        elHtml[0].classList.add('mode-dark')
-        isDark = true;
-    }
-
-    localStorage.setItem('isDark', isDark.toString())
+  // New way of detecting if the user have already his web-browser using a dark theme
+  // window.matchMedia('(prefers-color-scheme: dark)').matches
+  if (!html.classList.contains("dark") && isDark ) {
+    document.querySelector('html').classList.add("dark");
+  } else if (html.classList.contains("dark") && !isDark) {
+    document.querySelector('html').classList.remove("dark");
+  }
 }

@@ -2,10 +2,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Mail, Lock } from "@material-ui/icons";
-import { useRouter } from 'next/router';
-import AuthService from "../../util/userAuth";
-import { toast } from 'react-toastify';
-
+import AuthService from "../../services/userAuth";
+import { useRouter } from "next/router";
 interface IFormInput {
   email: string;
   password: string;
@@ -17,17 +15,15 @@ const schema = yup.object().shape({
 });
 
 export default function LoginForm() {
+  const authService = new AuthService();
+  const router = useRouter();
   const { register, errors, handleSubmit } = useForm<IFormInput>({
     resolver: yupResolver(schema),
   });
-  const router = useRouter();
-  const authService = new AuthService();
-
-  // router.push('/profile')
   
-  const onSubmit = (data: IFormInput) => {
-    // let res = authService.login(data);
-    toast.info(data.email);
+  const onSubmit = async (data: IFormInput) => {
+    authService.login(data);
+    router.push('/profile');
   }
 
   return (
@@ -54,7 +50,7 @@ export default function LoginForm() {
         />
       </div>
       <p className="mb-2 pl-2 text-sm text-red-600">{errors.password?.message}</p>
-      <input className="rounded bg-blue-400 hover:bg-blue-600 cursor-pointer focus:outline-none text-white py-2" type="submit" value="Login" />
+      <input className="rounded bg-blue-600 hover:bg-blue-500 cursor-pointer focus:outline-none text-white py-2" type="submit" value="Login" />
     </form>
   );
 }

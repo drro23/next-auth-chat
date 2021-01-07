@@ -1,9 +1,10 @@
-import { AppState } from '../slices/appSlice';
+import { AppState } from "../slices/appSlice";
+
 
 const appReducer = {
-  toggleLoading: (state: AppState) => {
-    return !state.loading;
+  toggleTheme: (state: AppState) => {
+    state.isDark = !state.isDark;
   },
 };
 
-export default appReducer;
+export { appReducer };

@@ -4,8 +4,44 @@ import { Icon } from "@material-ui/core";
 import SignUpForm from "../components/SignUpForm";
 import DrroLogo from "../components/icons/DrroLogo";
 import SwitchTheme from "../components/SwitchTheme";
+import { firebaseAdmin } from "../config/firebaseAdmin";
+import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import nookies from 'nookies';
 
-function SignUp() {
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  try {
+    const cookies = nookies.get(ctx);
+    const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+    const { uid } = token;
+    console.log(`already logged in ${uid}`);
+    if (uid !== null || uid !== undefined) {
+      ctx.res.setHeader("location", "/profile");
+      ctx.res.statusCode = 302;
+      ctx.res.end();
+      return {
+        redirect: {
+          location: "/profile",
+          permanent: false,
+        },
+        props: {} as never,
+      };
+    }
+
+    return {
+      props: { message: `It's all good ${uid}`, uid: uid },
+    };
+  } catch (err) {
+    console.log("not already logged in");
+    return {
+      props: {} as never,
+    };
+  }
+};
+
+function SignUp(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  
   return (
     <div className="bg-white dark:bg-darkBlack w-5/6 md:w-2/5 lg:w-1/3 border-solid border border-gray-300 mx-auto mt-6 rounded-xl p-8">
       <div className="flex justify-end mb-2">
